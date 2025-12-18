@@ -14,21 +14,9 @@ public class ConnectServer : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         SceneManager.LoadScene(1);
-        StartCoroutine(PingLoop());
 
     }
-    private IEnumerator PingLoop()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(3f);
-            if (PhotonNetwork.IsConnected)
-            {
-                int ping = PhotonNetwork.GetPing();
-                Debug.Log("Ping: " + PhotonNetwork.GetPing() + " ms");
-            }
-        }
-    }
+
 
 
 }

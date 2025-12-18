@@ -17,7 +17,7 @@ public class ConnectRoom : MonoBehaviourPunCallbacks
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     public void CrearSala()
@@ -29,30 +29,43 @@ public class ConnectRoom : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinRoom(sala);
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     public override void OnCreatedRoom()
     {
-        PhotonNetwork.JoinRoom(nombreSalaCrear.text);
+        print("se creo una sala");
+        PhotonNetwork.LoadLevel(3);
     }
     public override void OnJoinedRoom()
     {
-        SceneManager.LoadScene(3);
+        print("se unio a una sala");
+        PhotonNetwork.LoadLevel(3);
     }
 
-
+    public override void OnLeftRoom()
+    {
+     
+        print("dejamos una sala");
+    }
+    public override void OnJoinedLobby()
+    {
+        print("estamos en el lobby");
+    }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        for(int i=0;i<roomList.Count; i++)
+        foreach (Transform child in salaBotonParent)
         {
-            GameObject salaBotonNuevo=Instantiate(salaBotonPrefab,salaBotonParent,true);
+            Destroy(child.gameObject);
+        }
+        for (int i=0;i<roomList.Count; i++)
+        {
+            GameObject salaBotonNuevo=Instantiate(salaBotonPrefab,salaBotonParent,false);
             Button botonSala=salaBotonNuevo.GetComponent<Button>();
-            botonSala.onClick.AddListener(delegate { UnirseSala(roomList[i].Name); });
-            TextMeshProUGUI textoBoton=salaBotonPrefab.GetComponentInChildren<TextMeshProUGUI>();
+
+            string nombreSala = roomList[i].Name;
+            botonSala.onClick.AddListener(() => UnirseSala(nombreSala));
+       
+            TextMeshProUGUI textoBoton= salaBotonNuevo.GetComponentInChildren<TextMeshProUGUI>();
             textoBoton.text = roomList[i].Name;
 
 
