@@ -41,8 +41,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: jugador
+    uniqueID: 2942925295
+    locked: 0
   - name: ataques
     uniqueID: 4252159851
+    locked: 0
+  - name: ground
+    uniqueID: 1792866507
     locked: 0
   m_RenderingLayers:
   - Default

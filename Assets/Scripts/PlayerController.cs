@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviourPun
     [SerializeField] private float SaltoFuerza = 5f;
 
     [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Color colorJugador;
 
 
 
@@ -32,11 +33,17 @@ public class PlayerController : MonoBehaviourPun
 
         if (photonView.IsMine == false) 
         {
+            print("No es mi jugador, se desactivara");
             playerInput.enabled = false;
-            sprite.color = Color.green;
+            
 
         }
-            
+        if(photonView.IsMine == true)
+        {
+            sprite.color = colorJugador;
+        }
+
+
 
 
 
@@ -44,10 +51,10 @@ public class PlayerController : MonoBehaviourPun
 
     private void Atacar(InputAction.CallbackContext contexto)
     {
-        if (photonView.IsMine)
-        {
+
+        
             print("Atacando");
-        }
+        
 
     }
 
@@ -77,7 +84,9 @@ public class PlayerController : MonoBehaviourPun
         // Solo controlamos a nuestro propio jugador
         if (photonView.IsMine)
         {
-
+   
+                
+           
             // Leemos el valor de la acción "Move" definida en los Input Actions por defecto
             rb.linearVelocity = new Vector2(inputVector.x * speed, inputVector.y * speed);
 
