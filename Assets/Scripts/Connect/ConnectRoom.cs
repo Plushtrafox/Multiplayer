@@ -14,10 +14,13 @@ public class ConnectRoom : MonoBehaviourPunCallbacks
     [SerializeField] private Transform salaBotonParent;
 
 
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         PhotonNetwork.JoinLobby();
+        PhotonNetwork.AutomaticallySyncScene = true;
+
 
     }
 
@@ -34,7 +37,7 @@ public class ConnectRoom : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         print("se creo una sala");
-        PhotonNetwork.LoadLevel(3);
+        
     }
     public override void OnJoinedRoom()
     {

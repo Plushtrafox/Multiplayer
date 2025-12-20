@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4942431203326176018}
   - component: {fileID: 1068497073023628294}
   - component: {fileID: 5556076827275717668}
+  - component: {fileID: 1236312933240018125}
   m_Layer: 0
   m_Name: --Player--
   m_TagString: Untagged
@@ -60,6 +61,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5791553103227340219}
+  - {fileID: 1236312933240018125}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -70,7 +72,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991555006776881923}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
   m_Name: 
@@ -219,6 +221,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0071955025, y: 0.016789317}
   m_Size: {x: 0.9844968, y: 1.9641967}
   m_Direction: 0
+--- !u!114 &1236312933240018125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991555006776881923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonTransformView
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &2304367663939222726
 GameObject:
   m_ObjectHideFlags: 0
