@@ -35,12 +35,14 @@ public class PlayerController : MonoBehaviourPun
         {
             print("No es mi jugador, se desactivara");
             playerInput.enabled = false;
-            
+            gameObject.tag = "Enemigo";
+
 
         }
         if(photonView.IsMine == true)
         {
             sprite.color = colorJugador;
+
         }
 
 
@@ -60,10 +62,11 @@ public class PlayerController : MonoBehaviourPun
 
     private void Saltar(InputAction.CallbackContext contexto)
     {
-        if (photonView.IsMine)
-        {
-            rb.AddForce(Vector2.up * SaltoFuerza, ForceMode2D.Impulse);
-        }
+    
+            print("Saltando");
+            rb.AddForceY(SaltoFuerza,ForceMode2D.Impulse);
+
+        
     }
     private void Mover(InputAction.CallbackContext contexto)
     {
@@ -71,10 +74,13 @@ public class PlayerController : MonoBehaviourPun
         if (inputVector.x < 0)
         {
             sprite.flipX = true;
+            transform.localScale = new Vector3(-1, 1, 1);
+
         }
         else if (inputVector.x > 0)
         {
             sprite.flipX = false;
+            transform.localScale = new Vector3(1, 1, 1);
         }
 
     }
@@ -88,7 +94,7 @@ public class PlayerController : MonoBehaviourPun
                 
            
             // Leemos el valor de la acción "Move" definida en los Input Actions por defecto
-            rb.linearVelocity = new Vector2(inputVector.x * speed, inputVector.y * speed);
+            rb.linearVelocity = new Vector2(inputVector.x * speed, rb.linearVelocityY);
 
         }
     }
