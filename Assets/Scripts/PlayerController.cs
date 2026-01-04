@@ -1,6 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviourPun
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviourPun
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Color colorJugador;
 
+    private PhotonView _PlayerPhotonView;
 
 
     private void Awake()
@@ -45,11 +47,13 @@ public class PlayerController : MonoBehaviourPun
 
         }
 
+        _PlayerPhotonView = GetComponent<PhotonView>();
 
 
 
 
     }
+
 
     private void Atacar(InputAction.CallbackContext contexto)
     {
@@ -104,6 +108,27 @@ public class PlayerController : MonoBehaviourPun
         playerInput.actions["Caminar"].performed -= Mover;
         playerInput.actions["Caminar"].canceled -= Mover;
         playerInput.actions["Saltar"].started -= Saltar;
+
+    }
+
+
+    [PunRPC] // Esta etiqueta es OBLIGATORIA para que funcione
+    void Perder()
+    {
+
+        _PlayerPhotonView.RPC("Ganar", RpcTarget.Others);
+        SceneManager.LoadScene(4);
+
+
+
+    }
+
+    [PunRPC] // Esta etiqueta es OBLIGATORIA para que funcione
+    void Ganar()
+    {
+        SceneManager.LoadScene(5);
+
+
 
     }
 }

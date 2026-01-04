@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,16 +17,18 @@ public class AtaqueScript : MonoBehaviour
 
     [SerializeField] private float velocidadAtaque=10f;
 
+
     private void Awake()
     {
         playerInput.actions["Atacar"].started += DispararAtaque;
     }
 
+
     private void DispararAtaque( InputAction.CallbackContext contexto)
     {
         if (_puedeAtacar)
         {
-            GameObject disparoNuevo = Instantiate(prefabAtaque, spawnDisparo.position, spawnDisparo.rotation);
+            GameObject disparoNuevo = PhotonNetwork.Instantiate(prefabAtaque.name, spawnDisparo.position, spawnDisparo.rotation);
             Rigidbody2D rbNuevo = disparoNuevo.GetComponent<Rigidbody2D>();
             if (transform.localScale.x > 0)
             {
